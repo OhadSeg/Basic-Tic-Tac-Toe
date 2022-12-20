@@ -1,12 +1,17 @@
-const PLAYER_X_CLASS = 'x'
-const PLAYER_O_CLASS = 'circle'
+const PLAYER_X_CLASS = 'X'
+const PLAYER_O_CLASS = 'O'
 
-const cellElements = document.querySelectorAll('[data-cell]')
-const boardElement = document.getElementById('board')
-const winningMessageElement = document.getElementById('winningMessage')
-const restartButton = document.getElementById('restartButton')
-const winningMessageTextElement = document.getElementById('winningMessageText')
+// Game board - visible
+const board = Array.from(document.getElementsByClassName('cell'));
+const restartButton = document.getElementById('restartButton');
+const winningMessageTextElement = document.getElementById('winningMessageText');
+const currToPlayText = document.getElementById('currPlayerToPlay');
 
+//Player X is set to play first by default
+let currToPlay = PLAYER_X_CLASS;
+// back stage board
+let whoIsOnCellBoard = Array(9).fill(null);
+currToPlayText.innerHTML = "Turn " + currToPlay + "to play";
 
 const WINNING_COMBINATIONS = [
 	[0, 1, 2],
@@ -19,4 +24,3 @@ const WINNING_COMBINATIONS = [
 	[2, 4, 6]
 ]
 
-let isPlayer_O_Turn = false
