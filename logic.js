@@ -10,7 +10,7 @@ const currToPlayText = document.getElementById('currPlayerToPlay');
 //Player X is set to play first by default
 let currToPlay = PLAYER_X_CLASS;
 // back stage board
-let whoIsOnCellBoard = Array(9).fill(null);
+let whoIsOnCell = Array(9).fill(null);
 currToPlayText.innerHTML = "Turn " + currToPlay + "to play";
 
 const WINNING_COMBINATIONS = [
@@ -24,6 +24,20 @@ const WINNING_COMBINATIONS = [
 	[2, 4, 6]
 ]
 
+function startGame () {
+	board.forEach(cell => cell.addEventListener('click', onCellClicked))
+}
+
+function onCellClicked(e){
+	const cellClickedId = e.target.id;
+	// if an open cell was clicked
+	if(!whoIsOnCell[cellClickedId]){
+		whoIsOnCell[cellClickedId] = currToPlay;
+		e.target.innerHTML = currPlayer
+
+	}
+}
+
 restartButton.addEventListener('click', onRestartButtonClicked);
 
 function onRestartButtonClicked (e) {
@@ -34,4 +48,7 @@ function onRestartButtonClicked (e) {
         cell.style.color = ''
 	})
 	startGame();
+}
+
+function ifWon(){
 }
