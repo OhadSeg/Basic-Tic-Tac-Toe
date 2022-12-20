@@ -4,7 +4,7 @@ const PLAYER_O_CLASS = 'O'
 // Game board - visible
 const board = Array.from(document.getElementsByClassName('cell'));
 const restartButton = document.getElementById('restartButton');
-const winningMessageTextElement = document.getElementById('winningMessageText');
+const winningMessageText = document.getElementById('winningMessageText');
 const currToPlayText = document.getElementById('currPlayerToPlay');
 
 //Player X is set to play first by default
@@ -24,3 +24,14 @@ const WINNING_COMBINATIONS = [
 	[2, 4, 6]
 ]
 
+restartButton.addEventListener('click', onRestartButtonClicked);
+
+function onRestartButtonClicked (e) {
+	whoIsOnCellBoard.fill(null);
+	winningMessageText.innerHTML = ''; 
+	board.forEach(cell => {
+		cell.innerText = ''  // there are no HTML inside a cell so we will remove only text
+        cell.style.color = ''
+	})
+	startGame();
+}
