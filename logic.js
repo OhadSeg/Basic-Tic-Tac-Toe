@@ -2,16 +2,18 @@ const PLAYER_X_CLASS = 'X'
 const PLAYER_O_CLASS = 'O'
 
 // Game board - visible
-const board = Array.from(document.getElementsByClassName('cell'));
-const restartButton = document.getElementById('restartButton');
-const winningMessageText = document.getElementById('winningMessageText');
-const currToPlayText = document.getElementById('currPlayerToPlay');
+let board = Array.from(document.getElementsByClassName('cell'));
+let restartButton = document.getElementById('restartButton');
+let winningMessageText = document.getElementById('winningMessageText');
+let currToPlayText = document.getElementById('currPlayerToPlay');
 
 //Player X is set to play first by default
 let currToPlay = PLAYER_X_CLASS;
 // back stage board
 let whoIsOnCell = Array(9).fill(null);
-currToPlayText.innerHTML = "Turn " + currToPlay + "to play";
+currToPlayText.innerHTML = "Turn " + currToPlay;
+
+let winningCombColor = getComputedStyle(document.body).getPropertyValue('--winningComb')
 
 const WINNING_COMBINATIONS = [
 	[0, 1, 2],
@@ -33,13 +35,13 @@ function onCellClicked(e){
 	// if an open cell was clicked
 	if(!whoIsOnCell[cellClickedId]){
 		whoIsOnCell[cellClickedId] = currToPlay;
-		e.target.innerHTML = currPlayer;
+		e.target.innerHTML = currToPlay;
 		
 		if(isThereAWinner()){
-			winningMessageText.innerHTML = currPlayer + " Has Won!"
-            board.forEach(cell => cell.removeEventListener('click',cellClicked))
-            let WinningComb = isThereAWinner();
-            WinningComb.forEach(cell => board[cell].style.color = winningCombColor)
+			winningMessageText.innerHTML = currToPlay + " Has Won!"
+            board.forEach(cell => cell.removeEventListener('click',onCellClicked))
+            let winningComb = isThereAWinner();
+            winningComb.forEach(cell => board[cell].style.color = winningCombColor)
 		}
 
 	}

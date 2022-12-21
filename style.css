@@ -43,6 +43,6 @@ body {
 	font-size: 30px;
 }
 
-#playerTurnText {
+#currPlayerToPlay {
 	text-align: center;
 }
