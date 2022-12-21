@@ -43,14 +43,16 @@ function onCellClicked(e){
             let winningComb = isThereAWinner();
             winningComb.forEach(cell => board[cell].style.color = winningCombColor)
 		}
-
 	}
+	// if x playing switch to o else o playing switch to x
+	currToPlay = currToPlay === PLAYER_X_CLASS ? PLAYER_O_CLASS : PLAYER_X_CLASS
+    currToPlayText.innerHTML = "Turn " + currToPlay
 }
 
 restartButton.addEventListener('click', onRestartButtonClicked);
 
 function onRestartButtonClicked (e) {
-	whoIsOnCellBoard.fill(null);
+	whoIsOnCell.fill(null);
 	winningMessageText.innerHTML = ''; 
 	board.forEach(cell => {
 		cell.innerText = ''  // there are no HTML inside a cell so we will remove only text
@@ -62,10 +64,10 @@ function onRestartButtonClicked (e) {
 function isThereAWinner(){
 	for(const comb of WINNING_COMBINATIONS){
         let [a, b, c] = comb
-        if(occupancy[a] == currPlayer && occupancy[b] == currPlayer && occupancy[c] == currPlayer){
+        if(whoIsOnCell[a] == currToPlay && whoIsOnCell[b] == currToPlay && whoIsOnCell[c] == currToPlay){
             return [a, b, c]
         }
     }
-    return false
+    return false;
 }
 startGame()
