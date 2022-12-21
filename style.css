@@ -1,18 +1,22 @@
 :root {
 	--cell-size: 100px;
 
-	--color: #81c3fd; /* for hover */
-	--color-set: #0275d8; /* when set */
-	--l: 10px; /* X line-width */
+	--color: #81c3fd;
+	/* for hover */
+	--color-set: #0275d8;
+	/* when set */
+	--l: 10px;
+	/* X line-width */
 }
 
 body {
 	margin: 0;
+	--winningComb: rgb(251, 6, 6);
 }
 
 .board {
 	width: 100vw;
-	height: 100vh;
+	height: 50vh;
 	display: grid;
 	justify-content: center;
 	align-content: center;
@@ -30,4 +34,15 @@ body {
 	align-items: center;
 	position: relative;
 	cursor: pointer;
+	color: rgb(0, 56, 210);
+	font-size: 100px;
+}
+
+.winning-message {
+	text-align: center;
+	font-size: 30px;
+}
+
+#playerTurnText {
+	text-align: center;
 }

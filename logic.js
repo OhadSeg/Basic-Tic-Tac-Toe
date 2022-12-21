@@ -33,7 +33,14 @@ function onCellClicked(e){
 	// if an open cell was clicked
 	if(!whoIsOnCell[cellClickedId]){
 		whoIsOnCell[cellClickedId] = currToPlay;
-		e.target.innerHTML = currPlayer
+		e.target.innerHTML = currPlayer;
+		
+		if(isThereAWinner()){
+			winningMessageText.innerHTML = currPlayer + " Has Won!"
+            board.forEach(cell => cell.removeEventListener('click',cellClicked))
+            let WinningComb = isThereAWinner();
+            WinningComb.forEach(cell => board[cell].style.color = winningCombColor)
+		}
 
 	}
 }
@@ -50,5 +57,13 @@ function onRestartButtonClicked (e) {
 	startGame();
 }
 
-function ifWon(){
+function isThereAWinner(){
+	for(const comb of WINNING_COMBINATIONS){
+        let [a, b, c] = comb
+        if(occupancy[a] == currPlayer && occupancy[b] == currPlayer && occupancy[c] == currPlayer){
+            return [a, b, c]
+        }
+    }
+    return false
 }
+startGame()
